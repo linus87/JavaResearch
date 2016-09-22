@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<class>
+   <className>183 class</className>
+   <studentNum>3</studentNum>
+   <student rollno="393" gender="FEMALE">
+      <firstname>dinkar</firstname>
+      <lastname>kad</lastname>
+      <nickname>dinkar</nickname>
+      <marks>85</marks>
+   </student>
+   <student rollno="493">
+      <firstname>Vaneet</firstname>
+      <lastname>Gupta</lastname>
+      <nickname>vinni</nickname>
+      <marks>95</marks>
+      <gender>MALE</gender>
+   </student>
+   <student rollno="593">
+      <firstname>jasvir</firstname>
+      <lastname>singn</lastname>
+      <nickname>jazz</nickname>
+      <marks>90</marks>
+   </student>
+   <teacher rollno="1">
+      <firstname>dinkar</firstname>
+      <lastname>kad</lastname>
+      <nickname>dinkar</nickname>
+      <marks>85</marks>
+   </teacher>
+   <teacher rollno="2">
+      <firstname>Vaneet</firstname>
+      <lastname>Gupta</lastname>
+      <nickname>vinni</nickname>
+      <marks>95</marks>
+   </teacher>
+   <teacher rollno="3">
+      <firstname>jasvir</firstname>
+      <lastname>singn</lastname>
+      <nickname>jazz</nickname>
+      <marks>90</marks>
+   </teacher>
+   <headman>Good</headman>
+   <headman>Bad</headman>
+   <courses>
+   		<course>
+   			<name>English</name>
+   			<time>45</time>
+   		</course>
+   		<course>
+   			<name>Physical</name>
+   			<time>55</time>
+   		</course>
+   </courses>
+</class>

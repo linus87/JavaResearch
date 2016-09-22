@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Wed Apr 20 13:44:22 CST 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.2 - (1557835): instance a816c00e-0154-3232-ae83-000007154718 
+on database directory C:\Users\lyan2\workspace_java\JavaResearch\DERBYDB\firstdb  with class loader null 
+Loaded from null
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_79-b15
+user.dir=C:\Users\lyan2\workspace_java\JavaResearch
+os.name=Windows 7
+os.arch=amd64
+os.version=6.1
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
