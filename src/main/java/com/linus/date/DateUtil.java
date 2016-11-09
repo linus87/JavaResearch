@@ -28,6 +28,7 @@ public class DateUtil {
 	private static final String DOT_DATE_FORMAT = "yyyy.MM.dd";
 	private static final String SLASH_DATE_FORMAT = "yyyy/MM/dd";
 	private static final String ISO_DATE_FORMAT = "yyyy-MM-dd";
+	private static final String AMERICAN_DATE_FORMAT = "MM/dd/yyyy";
 	
 	// CS API and SaleForce use this time format, in fact, it's ISO 8601 Date and time format.'Z' means UTC time.
 	private static final String UTC_DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
@@ -36,14 +37,42 @@ public class DateUtil {
 	public final static TimeZone BEIJING_TIMEZONE = TimeZone.getTimeZone("GMT+8:00");
 
 	private static ThreadLocal<DateFormat> timeThread = new ThreadLocal<DateFormat>();
+	
 	private static ThreadLocal<DateFormat> simpleDateThread = new ThreadLocal<DateFormat>();
 	private static ThreadLocal<DateFormat> slashDateThread = new ThreadLocal<DateFormat>();
 	private static ThreadLocal<DateFormat> isoDateThread = new ThreadLocal<DateFormat>();
+	private static ThreadLocal<DateFormat> americanDateThread = new ThreadLocal<DateFormat>();
+	
 	private static ThreadLocal<DateFormat> isoDateTimeThread = new ThreadLocal<DateFormat>();
 	private static ThreadLocal<DateFormat> isoDateTimeZoneThread = new ThreadLocal<DateFormat>();
 	
+	public static void main(String[] args) throws ParseException  {
+		System.out.println(parseSlashDate("2/21/2016"));
+		System.out.println(parseAmericanDate("2/21/2016"));
+	}
+	
+	/***************************************** American date format: mm/dd/yyyy *********************************************************/
+    public static DateFormat getAmericanDateFormat() {
+    	DateFormat df = americanDateThread.get();
+    	if (df == null) {
+    		df = new SimpleDateFormat(AMERICAN_DATE_FORMAT);
+    		americanDateThread.set(df);
+    	}
+    	
+    	return df;
+    }
+    
+    public static Date parseAmericanDate (String dateStr) throws ParseException {
+        return getAmericanDateFormat().parse(dateStr);
+    }
+    
+    public static String formatAmericanDate (Date date) {
+        return getAmericanDateFormat().format(date);
+    }
+	
+    /***************************************** Time format: HH:mm:ss *********************************************************/
 	/**
-	 * Get date format for: HH:mm:ss
+	 * Get date format "HH:mm:ss"
 	 * @return
 	 */
 	public static DateFormat getTimeFormat() {
@@ -55,6 +84,36 @@ public class DateUtil {
 
 		return df;
 	}
+	
+	/**
+	 * Format date to "HH:mm:ss"
+	 * @param date
+	 * @return
+	 */
+	public static String formatTime(Date date) {
+		DateFormat df = getTimeFormat();
+		
+		return df.format(date);
+	}
+	
+	/***************************************** date format: yyyy/MM/dd *********************************************************/
+	public static DateFormat getSlashDateFormat() {
+		DateFormat df = slashDateThread.get();
+		if (df == null) {
+			df = new SimpleDateFormat(SLASH_DATE_FORMAT);
+			slashDateThread.set(df);
+		}
+
+		return df;
+	}
+    
+    public static Date parseSlashDate (String dateStr) throws ParseException {
+        return getSlashDateFormat().parse(dateStr);
+    }
+    
+    public static String formatSlashDate (Date date) {
+        return getSlashDateFormat().format(date);
+    }
 
 	/**
 	 * DateFormat for parsing date like: yyyy.MM.dd
@@ -70,19 +129,7 @@ public class DateUtil {
 		return df;
 	}
 	
-	/**
-	 * DateFormat for parsing date like: yyyy/MM/dd
-	 * @return
-	 */
-	public static DateFormat getSlashDateFormat() {
-		DateFormat df = slashDateThread.get();
-		if (df == null) {
-			df = new SimpleDateFormat(SLASH_DATE_FORMAT);
-			slashDateThread.set(df);
-		}
-
-		return df;
-	}
+	
 	
 	/**
 	 * DateFormat for parsing date like: yyyy-MM-dd
@@ -178,17 +225,6 @@ public class DateUtil {
 		return format.parse(dateStr);
 	}
 	
-	/**
-	 * Format date to : yyyy.MM.dd
-	 * @param date
-	 * @param zone
-	 * @return
-	 */
-	public static String formatTime(Date date) {
-		DateFormat df = getTimeFormat();
-		
-		return df.format(date);
-	}
 
 	/**
 	 * Format date to : yyyy.MM.dd

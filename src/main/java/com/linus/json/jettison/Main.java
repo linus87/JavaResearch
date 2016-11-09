@@ -18,7 +18,7 @@ import com.linus.json.jettison.pojo.Student;
 
 public class Main {
 	public static void main(String[] args) {
-
+		Integer.parseInt(null);
 		testJSONObjectWithMap();
 		testJSONObjectFromString();
 		testJSONObjectWithStAX();
@@ -27,7 +27,7 @@ public class Main {
 	public static void testJSONObjectWithMap() {
 		System.out.println("Method testJSONObjectWithMap: ");
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("firstName", "Linus");
+		map.put("firstName", "Li`n`us");
 		map.put("lastName", "Yan");
 		map.put("age", 30);
 		map.put("admin", false);
@@ -37,7 +37,7 @@ public class Main {
 		map.put("studentIds", studentIds);
 		
 		List<String> list = new ArrayList<String>();
-		list.add("element 1");
+		list.add("eleme`nt 1");
 		list.add("element 2");
 		list.add("element 3");
 		map.put("list", list);

@@ -41,6 +41,7 @@ public class DateTest {
 		df.setMaximumFractionDigits(0);
 		System.out.println(df.format(result));
 		
+		testGMTTime();
 		
 		testParse();
 //		
@@ -53,6 +54,14 @@ public class DateTest {
 		testTimeZone();
 		
 		testCalendar();
+	}
+	
+	public static void testGMTTime() {
+		System.out.println("***************************** GMT Time **************************************");
+		Date d = new Date();
+		System.out.println(d.toGMTString());
+		System.out.println(d.toLocaleString());
+		System.out.println(d.toString());
 	}
 	
 	public static void testParse() throws ParseException {

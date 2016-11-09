@@ -10,7 +10,7 @@ public class User {
 	private String username = "linus";
 	
 	@SerializedName("pw")
-	private String password = "helloworld";
+	private String password = null;
 	
 	@SerializedName("emailAddress")
 	private String email = "linus.yan@hotmail.com";

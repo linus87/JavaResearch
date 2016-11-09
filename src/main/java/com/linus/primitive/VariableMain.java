@@ -1,5 +1,8 @@
 package com.linus.primitive;
 
+import java.lang.reflect.Type;
+import java.util.Date;
+
 public class VariableMain {
 	
 	// below eight fields have default value 
@@ -34,7 +37,10 @@ public class VariableMain {
 		System.out.println(g);
 		System.out.println(h);
 		
-		System.out.println(Long.parseLong(null));
+//		System.out.println(Long.parseLong(null));
+		System.out.println(null instanceof Date);
+		System.out.println(null instanceof Object);
+		System.out.println(null instanceof Type);
 	}
 
 }

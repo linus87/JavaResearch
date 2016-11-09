@@ -3,11 +3,18 @@ package com.linus.primitive;
 import javax.lang.model.type.PrimitiveType;
 
 public class PrimitiveMain {
+	public Double field1;
+	public Double field2;
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		PrimitiveMain obj = new PrimitiveMain();
+		
+//		System.out.println(obj.field1 + obj.field2);
+		
+		
 		isAssignableFrom();
 		convert();
 	}
@@ -60,14 +67,14 @@ public class PrimitiveMain {
 		
 		System.out.println("---------------------------------------------------------------------------------------");
 		System.out.println("Primitive Type:");
-		System.out.println("PrimitiveType is assignable from boolean: " + PrimitiveType.class.isAssignableFrom(boolean.class));
+		System.out.println("boolean is assignable from PrimitiveType: " + boolean.class.isAssignableFrom(PrimitiveType.class));
 		System.out.println("Character is assignable from char: " + PrimitiveType.class.isAssignableFrom(char.class));
 		System.out.println("PrimitiveType is is assignable from byte: " + PrimitiveType.class.isAssignableFrom(byte.class));
 		System.out.println("Float is is assignable from float: " + PrimitiveType.class.isAssignableFrom(float.class));
 		
 		System.out.println("---------------------------------------------------------------------------------------");
 		System.out.println("Primitive Type:");
-		System.out.println("PrimitiveType is assignable from boolean: " + PrimitiveType.class.isAssignableFrom(Boolean.class));
+		System.out.println("Boolean is assignable from PrimitiveType: " + Boolean.class.isAssignableFrom(PrimitiveType.class));
 		System.out.println("Character is assignable from char: " + PrimitiveType.class.isAssignableFrom(Character.class));
 		System.out.println("PrimitiveType is is assignable from byte: " + PrimitiveType.class.isAssignableFrom(Byte.class));
 		System.out.println("Float is is assignable from float: " + PrimitiveType.class.isAssignableFrom(Float.class));

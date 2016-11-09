@@ -21,7 +21,7 @@ public class GsonTest {
 	
 	@Test
 	public void testPrimitiveType() {
-		System.out.println("Primitive Type Test:");
+		System.out.println("######################## Primitive Type Test: #####################");
 		Gson gson = new Gson();
 		
 		// serialization
@@ -39,11 +39,12 @@ public class GsonTest {
 	
 	@Test
 	public void testObjectType() {
-		System.out.println("Object Type Test:");
-		Gson gson = new Gson();
+		System.out.println("######################## Object Type Test: ########################");
+		Gson gson = new GsonBuilder().serializeNulls().create();
 		
 		User u = new User();
-		u.setPassword("world");
+//		u.setPassword("world");
+		u.setPassword(null);
 		
 		// serialization
 		String json = gson.toJson(u);
@@ -51,13 +52,13 @@ public class GsonTest {
 		
 		// deserialization
 		User u2 = gson.fromJson(json, User.class);
-		Assert.assertEquals("world", u2.getPassword());
+		System.out.println(gson.toJson(u2));
 		System.out.println(u2.getBirthday());
 	}
 	
 	@Test
 	public void testObjectField() {
-		System.out.println("Object field Test:");
+		System.out.println("######################## Object field Test: ########################");
 		Gson gson = new Gson();
 		
 		User u = new User();
@@ -70,7 +71,6 @@ public class GsonTest {
 		
 		// deserialization
 		User u2 = gson.fromJson(json, User.class);
-		Assert.assertEquals("helloworld", u2.getPassword());
 	}
 	
 	@Test
