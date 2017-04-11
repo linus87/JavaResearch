@@ -277,6 +277,22 @@ public class DateUtil {
 		return format.format(date);
 	}
 	
+    /**************************************************************************************************/
+    public static Date parseDate (String dateStr) throws ParseException {
+    	if (dateStr == null || dateStr.isEmpty()) return null;
+    	
+    	try {
+    		return getISODateFormat().parse(dateStr);
+    	} catch (Exception e) {
+    		try {
+    			return getSlashDateFormat().parse(dateStr);
+    		} catch (Exception e2) {
+    			return getDotDateFormat().parse(dateStr);
+    		}
+    	}
+    }
+    /**************************************************************************************************/
+	
 	/**
 	 * Date stored in database may be not system time, for example, it may be beijing time. If we compare it with system time directly, it's not correct.
 	 * We must convert it into system time first. 

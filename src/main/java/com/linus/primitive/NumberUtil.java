@@ -15,6 +15,11 @@ public class NumberUtil {
 		System.out.println(toPrecision(3.4482432d, 2));
 		System.out.println(toPercentage(3.4432432d, 2));
 		System.out.println(percentToDouble("3.4532%"));
+		
+		String in = ":4324324";
+		String[] strs = in.split(":");
+		System.out.println(strs.length);
+		System.out.println(strs[1]);
 	}
 	
 	/**

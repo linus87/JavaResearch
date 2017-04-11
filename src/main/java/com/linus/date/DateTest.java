@@ -21,6 +21,8 @@ public class DateTest {
 		Calendar d = Calendar.getInstance();
 		d.set(2015, 0, 3);
 		
+		d.setTime(null);
+		
 		System.out.println(d.toString());
 		System.out.println("Month: " + d.get(Calendar.MONTH)); // 1- 31
 		System.out.println("Day of year: " + d.get(Calendar.DAY_OF_YEAR)); // 1- 31
