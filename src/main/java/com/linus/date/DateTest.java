@@ -21,7 +21,7 @@ public class DateTest {
 		Calendar d = Calendar.getInstance();
 		d.set(2015, 0, 3);
 		
-		d.setTime(null);
+//		d.setTime(null);
 		
 		System.out.println(d.toString());
 		System.out.println("Month: " + d.get(Calendar.MONTH)); // 1- 31
@@ -53,6 +53,8 @@ public class DateTest {
 		
 		testGMVDate();
 		
+		testTimeZoneWithTime();
+		
 		testTimeZone();
 		
 		testCalendar();
@@ -61,31 +63,24 @@ public class DateTest {
 	public static void testGMTTime() {
 		System.out.println("***************************** GMT Time **************************************");
 		Date d = new Date();
-		System.out.println(d.toGMTString());
-		System.out.println(d.toLocaleString());
-		System.out.println(d.toString());
+		System.out.println("GMT    Time: " + d.toGMTString());
+		System.out.println("Locale Time: " + d.toLocaleString());
+		System.out.println("To String  : " + d.toString());
 	}
 	
 	public static void testParse() throws ParseException {
+		System.out.println("***************************** Simple Date Format **************************************");
 		String dateStr = "2016-06-02T10:13:29.902Z";
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-		
-//		Date date = new Date(dateStr);
-//		System.out.println(date);
 		
 		Date date = dateFormat.parse(dateStr);
 		System.out.println(date);		
-		
-		System.out.println(date);	
 	}
 	
 	public static void testCompage() throws ParseException {
+		System.out.println("***************************** Compare Date **************************************");
 		String dateStr = "2016-06-02T10:13:29.902Z";
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-		
-		/*Date date = new Date(dateStr);
-		System.out.println(date);*/
-		System.out.println("Test time compare: ");
 		
 		Date date = dateFormat.parse(dateStr);
 		System.out.println(date);
@@ -120,23 +115,37 @@ public class DateTest {
 
 	}
 	
+	/**
+	 * It date is given in time(milliseconds), it means zero-time zone's time.
+	 * When Date object is created by this time, its string representation will be converted to local system time, but time value is not changed.
+	 * @throws ParseException
+	 */
+	public static void testTimeZoneWithTime() throws ParseException {
+		System.out.println("***************************** Timezone with timestamp Test **************************************");
+		Long time = 0l;
+		Date date = new Date(time);
+		System.out.println("Local date  : " + date);
+		System.out.println("Milliseconds: " + date.getTime());
+	}
+	
+	/**
+	 * If date is given in string, it means local system date. But its time(milliseconds) is still zero-time zone's time.
+	 * For example, 1970-01-01T08:00:00.902Z, its time value is 902 if it's calculated in a server located in BeiJing.
+	 * @throws ParseException
+	 */
 	public static void testTimeZone() throws ParseException {
-		String dateStr = "2016-06-02T10:13:29.902Z";
-		TimeZone GMT_TIMEZONE = TimeZone.getTimeZone("GMT+9:00");
+		System.out.println("***************************** Timezone with string date Test **************************************");
+		String dateStr = "1970-01-01T08:00:00.902Z";
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-		
-		System.out.println("Test time zone: ");
-		
 		Date date = dateFormat.parse(dateStr);
 		System.out.println(date);
-		System.out.println(date.getTimezoneOffset());
-		System.out.println(dateFormat.format(date));
+		System.out.println(date.getTime());
 		
+		TimeZone GMT_TIMEZONE = TimeZone.getTimeZone("GMT+8:00");
 		dateFormat.setTimeZone(GMT_TIMEZONE);
 		date = dateFormat.parse(dateStr);
 		System.out.println(date);
 		System.out.println(date.getTimezoneOffset());
-		System.out.println(dateFormat.format(date));
 		
 		TimeZone UK_TIMEZONE = TimeZone.getTimeZone("GMT+0:00");
 		Locale locale = Locale.UK;

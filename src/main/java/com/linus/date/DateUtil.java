@@ -35,6 +35,7 @@ public class DateUtil {
 
 	// Chinese bei jing time zone
 	public final static TimeZone BEIJING_TIMEZONE = TimeZone.getTimeZone("GMT+8:00");
+	public static final TimeZone GMT_TIMEZONE =  TimeZone.getTimeZone("GMT");
 
 	private static ThreadLocal<DateFormat> timeThread = new ThreadLocal<DateFormat>();
 	
@@ -49,6 +50,12 @@ public class DateUtil {
 	public static void main(String[] args) throws ParseException  {
 		System.out.println(parseSlashDate("2/21/2016"));
 		System.out.println(parseAmericanDate("2/21/2016"));
+		
+		Date date = parseISODateTime("1970-01-01 00:00:00", null);
+		System.out.println(date.getTime());
+		
+		System.out.println(formatISODateTime(new Date(), GMT_TIMEZONE));
+		System.out.println(formatISODateTime(new Date(), TimeZone.getTimeZone("GMT+8:00")));
 	}
 	
 	/***************************************** American date format: mm/dd/yyyy *********************************************************/
@@ -179,7 +186,12 @@ public class DateUtil {
 	 */
 	public static Date parseDotDate(String dateStr, TimeZone zone) throws ParseException {
 		DateFormat df = getDotDateFormat();
-		if (zone != null) df.setTimeZone(zone);
+		
+		if (zone != null) {
+			df.setTimeZone(zone);
+		} else {
+			df.setTimeZone(GMT_TIMEZONE);
+		}
 		
 		return df.parse(dateStr);
 	}
@@ -193,7 +205,12 @@ public class DateUtil {
 	 */
 	public static Date parseISODate(String dateStr, TimeZone zone) throws ParseException {
 		DateFormat df = getISODateFormat();
-		if (zone != null) df.setTimeZone(zone);
+		
+		if (zone != null) {
+			df.setTimeZone(zone);
+		} else {
+			df.setTimeZone(GMT_TIMEZONE);
+		}
 		
 		return df.parse(dateStr);
 	}
@@ -207,7 +224,12 @@ public class DateUtil {
 	 */
 	public static Date parseISODateTime(String dateStr, TimeZone zone) throws ParseException {
 		DateFormat df = getISODateTimeFormat();
-		if (zone != null) df.setTimeZone(zone);
+		
+		if (zone != null) {
+			df.setTimeZone(zone);
+		} else {
+			df.setTimeZone(GMT_TIMEZONE);
+		}
 		
 		return df.parse(dateStr);
 	}
@@ -221,7 +243,13 @@ public class DateUtil {
 	 */
 	public static Date parseUTCDateTime(String dateStr, TimeZone zone) throws ParseException {
 		DateFormat format = getISODateTimeZoneFormat();
-		format.setTimeZone(zone);
+		
+		if (zone != null) {
+			format.setTimeZone(zone);
+		} else {
+			format.setTimeZone(GMT_TIMEZONE);
+		}
+		
 		return format.parse(dateStr);
 	}
 	
@@ -234,7 +262,12 @@ public class DateUtil {
 	 */
 	public static String formatDotDate(Date date, TimeZone zone) {
 		DateFormat df = getDotDateFormat();
-		if (zone != null) df.setTimeZone(zone);
+		
+		if (zone != null) {
+			df.setTimeZone(zone);
+		} else {
+			df.setTimeZone(GMT_TIMEZONE);
+		}
 		
 		return df.format(date);
 	}
@@ -247,7 +280,12 @@ public class DateUtil {
 	 */
 	public static String formatISODate(Date date, TimeZone zone) {
 		DateFormat df = getISODateFormat();
-		if (zone != null) df.setTimeZone(zone);
+		
+		if (zone != null) {
+			df.setTimeZone(zone);
+		} else {
+			df.setTimeZone(GMT_TIMEZONE);
+		}
 		
 		return df.format(date);
 	}
@@ -260,7 +298,12 @@ public class DateUtil {
 	 */
 	public static String formatISODateTime(Date date, TimeZone zone) {
 		DateFormat df = getISODateTimeFormat();
-		if (zone != null) df.setTimeZone(zone);
+		
+		if (zone != null) {
+			df.setTimeZone(zone);
+		} else {
+			df.setTimeZone(GMT_TIMEZONE);
+		}
 		
 		return df.format(date);
 	}
@@ -273,7 +316,13 @@ public class DateUtil {
 	 */
 	public static String formatUTCDateTime(Date date, TimeZone zone) {
 		DateFormat format = getISODateTimeZoneFormat();
-		format.setTimeZone(zone);
+		
+		if (zone != null) {
+			format.setTimeZone(zone);
+		} else {
+			format.setTimeZone(GMT_TIMEZONE);
+		}
+		
 		return format.format(date);
 	}
 	
