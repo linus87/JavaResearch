@@ -16,7 +16,6 @@ public enum Gender implements ICustomEnum {
 		return name;
 	}
 
-	@Override
 	public String value() {
 		// TODO Auto-generated method stub
 		return this.name;
