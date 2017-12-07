@@ -1,4 +1,4 @@
-package com.linus.https;
+package com.linus.https.telesign;
 
 public class TelesignResult {
 	private boolean success;

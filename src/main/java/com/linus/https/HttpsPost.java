@@ -91,7 +91,7 @@ public class HttpsPost {
 		// 声明SSL上下文
 		SSLContext sslContext = null;
 		// 实例化主机名验证接口
-		HostnameVerifier hnv = new MyHostnameVerifier();
+		HostnameVerifier hnv = new LocalhostHostnameVerifier();
 		try {
 			sslContext = getSSLContext(password, keyStorePath, trustStorePath);
 		} catch (GeneralSecurityException e) {

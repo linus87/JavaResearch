@@ -35,8 +35,7 @@ public class HttpClientSendPost {
 		try {
 			SSLContext sslcontext = SSLContext.getInstance("TLS");
 			sslcontext.init(null, new TrustManager[] { truseAllManager }, null);
-			SSLSocketFactory sf = new SSLSocketFactory(sslcontext);
-			sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+			SSLSocketFactory sf = new SSLSocketFactory(sslcontext, SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 			Scheme https = new Scheme("https", 443, sf);
 			httpclient.getConnectionManager().getSchemeRegistry().register(https);
 		} catch (Exception e) {
