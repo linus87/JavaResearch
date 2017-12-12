@@ -7,6 +7,8 @@ import java.math.RoundingMode;
 public class BigDecimalDemo {
 
 	public static void main(String[] args) {
+		testString();
+		testLong();
 		testFloat();
 		testDouble();
 		
@@ -14,6 +16,39 @@ public class BigDecimalDemo {
 		testRoundingMode();
 		testExcatMathContext();
 		testInexcatMathContext();
+	}
+	
+	public static void testString() {
+		System.out.println("----------------------------------------String-----------------------------------------");
+		BigDecimal a = new BigDecimal("0.75");
+		System.out.println(a.toString());
+		
+		BigDecimal b = new BigDecimal(3.18);
+		System.out.println(b.toString());
+		
+		BigDecimal c = a.multiply(b);
+		System.out.println(c.toString());
+		
+		BigDecimal d = new BigDecimal("3.18");
+		System.out.println(d.toString());
+		
+		BigDecimal e = a.multiply(d);
+		System.out.println(e.toString());
+		
+		System.out.println("----------------------------------------Separator-----------------------------------------");
+	}
+	
+	public static void testLong() {
+		System.out.println("----------------------------------------Long-----------------------------------------");
+		BigDecimal a = new BigDecimal("0.751783");
+		System.out.println(a.toString());
+		
+		BigDecimal b = new BigDecimal(213L);
+		System.out.println(b.toString());
+		
+		BigDecimal c = a.multiply(b);
+		System.out.println(c.toString());
+		System.out.println("----------------------------------------Separator-----------------------------------------");
 	}
 	
 	public static void testFloat() {
