@@ -82,10 +82,12 @@ public class BigDecimalDemo {
 		
 		BigDecimal b = a.setScale(4, RoundingMode.HALF_UP);
 		System.out.println(b.precision());
+		System.out.println(b.scale());
 		System.out.println(b.toString());
 		
 		BigDecimal c = new BigDecimal(3.14159265D, new MathContext(6, RoundingMode.HALF_DOWN));
 		System.out.println(c.precision());
+		System.out.println(c.scale());
 		System.out.println(c.toString());
 		System.out.println("----------------------------------------Separator-----------------------------------------");
 	}

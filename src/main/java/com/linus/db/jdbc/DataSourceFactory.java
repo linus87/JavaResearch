@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 import oracle.jdbc.pool.OracleDataSource;
 
 import org.apache.derby.jdbc.ClientDataSource;
-import org.apache.derby.jdbc.EmbeddedDataSource40;
+import org.apache.derby.jdbc.EmbeddedDataSource;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
@@ -62,7 +62,7 @@ public class DataSourceFactory {
 		DataSource ds = null;
 		
 		if ("EMBEDDED".equalsIgnoreCase(props.getProperty("DERBY_DB_ENVIRONMENT"))) {
-			EmbeddedDataSource40 eds = new EmbeddedDataSource40();
+			EmbeddedDataSource eds = new EmbeddedDataSource();
 			
 			eds.setCreateDatabase("create");
 			eds.setDatabaseName(props.getProperty("DERBY_DB_DATABASE"));
