@@ -6,15 +6,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ConcurrentHashMapTest {
 	public static void main(String[] args) {
-		ConcurrentHashMap<Integer, Integer> map = new ConcurrentHashMap<Integer, Integer>(
-				16);
+		ConcurrentHashMap<Integer, Integer> map = new ConcurrentHashMap<Integer, Integer>(16);
 		Thread addRunnable = new MapAddThread(map);
 		Thread clearRunnable = new MapClearThread(map);
 		Thread readRunnable = new MapReadThread(map);
 
 		addRunnable.start();
 		readRunnable.start();
-//		clearRunnable.start();
+		// clearRunnable.start();
 	}
 }
 
@@ -28,7 +27,7 @@ class MapAddThread extends Thread {
 	@Override
 	public void run() {
 		System.out.println("Map add thread");
-		
+
 		for (int i = 0; i < 32; i++) {
 			map.put(i, i);
 			System.out.println("add:" + i);
@@ -54,7 +53,7 @@ class MapClearThread extends Thread {
 	@Override
 	public void run() {
 		System.out.println("Map clear thread");
-		
+
 		for (int i = 0; i < 32; i++) {
 			System.out.println("clear");
 			map.clear();
@@ -87,12 +86,12 @@ class MapReadThread extends Thread {
 					e.printStackTrace();
 				}
 			}
-			
+
 			if (map.keySet().size() == 32) {
 				break;
 			}
 		}
-		
+
 	}
 
 }

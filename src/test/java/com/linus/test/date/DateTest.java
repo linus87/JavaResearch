@@ -16,5 +16,8 @@ public class DateTest {
 		
 		Assert.assertEquals(a, b);
 		Assert.assertTrue(a.compareTo(b) == 0);;
+		
+		// Can't compare Dates with == operator.
+		Assert.assertFalse(a == b);
 	}
 }
