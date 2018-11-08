@@ -1,45 +1,57 @@
 package com.linus.test.collection.map;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
+import com.linus.concurrent.ConcurrentUtils;
+
 public class HashMapTest {
-	HashMap<String, String> map = new HashMap<String, String>();
+	Set<String> set = new HashSet<String>();
 	
+	/**
+	 * If we don't use synchronized to check, you may get several "remove". It means
+	 * there are several threads running between "!set.contains()" and "set.add()".
+	 * @throws InterruptedException
+	 */
 	@Test
-	public void main() {
-		Map<Object, Object> existedValues = new HashMap<Object, Object>();
-		existedValues.put(new String("hello"), null);
-		
-		if (existedValues.containsKey("hello")) {
-			System.out.println("World");
-		}
-	}
-	
-	@Test
-	public void testPutMethod() {
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("hello", null);
-		map.put("hello", "world");
-		
-		System.out.println(map.get("hello"));
-	}
-	
-	@Test
-	public void test() {
+	public void test() throws InterruptedException {
 		ExecutorService executor = Executors.newFixedThreadPool(10);
-		HashMap<String, String> map = new HashMap<String, String>();
 
 		Runnable readTask = () -> {
-			if (!map.containsKey("foo")) {
-				map.put("foo", "bar");
-				System.out.println("hello world");
-//				ConcurrentUtils.sleep(2);
-				map.remove("foo");
+			if (!set.contains("foo")) {
+				set.add("foo");
+				ConcurrentUtils.sleep(1);
+				set.remove("foo");
+				System.out.println("remove");
+			}
+		};
+
+		for (int i = 0; i < 20; i++) {
+			executor.execute(readTask);
+		}
+		
+		executor.awaitTermination(3, TimeUnit.SECONDS);
+		executor.shutdown();
+	}
+	
+	/**
+	 * We use synchronized method to check if "bar" is doing something, you can't do it frequently.
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void testSynchronize() throws InterruptedException {
+		ExecutorService executor = Executors.newFixedThreadPool(10);
+
+		Runnable readTask = () -> {
+			if (toHandle("bar")) {
+				ConcurrentUtils.sleep(1);
+				set.remove("bar");
+				System.out.println("remove");
 			}
 		};
 
@@ -50,38 +62,16 @@ public class HashMapTest {
 		for (int i = 0; i < 10; i++) {
 			executor.execute(readTask);
 		}
+		executor.awaitTermination(3, TimeUnit.SECONDS);
+		executor.shutdown();
 	}
 	
-	@Test
-	public void testSynchronize() {
-		ExecutorService executor = Executors.newFixedThreadPool(10);
-
-		Runnable readTask = () -> {
-			if (!isDoing("foo")) {
-				System.out.println("hello world");
-//					ConcurrentUtils.sleep(2);
-				map.remove("foo");
-				System.out.println("after remove");
-			} else {
-				System.out.println("is doing");
-			}
-		};
-
-		/**
-		 * both read tasks have to wait the whole second until the write task has
-		 * finished.
-		 **/
-		for (int i = 0; i < 10; i++) {
-			executor.execute(readTask);
+	public synchronized boolean toHandle(String key) {
+		boolean flag = set.contains(key);
+		if (flag == false) {
+			set.add(key);
 		}
-	}
-	
-	public synchronized boolean isDoing(String key) {
-		boolean flag = map.containsKey(key);
-		if (!flag) {
-			map.put(key, "bar");
-		}
-		return flag;
+		return !flag;
 	}
 
 }
