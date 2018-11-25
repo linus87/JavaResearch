@@ -3,6 +3,7 @@ package com.linus.test.date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -12,10 +13,11 @@ import com.google.gson.JsonSyntaxException;
 
 public class DateFormatTest {
 	// below three date formatters are used in com.google.gson.internal.bind.DateTypeAdaptor
-	private final DateFormat enUsFormat = DateFormat.getDateTimeInstance(
+	private final DateFormat usFormat = DateFormat.getDateTimeInstance(
 			DateFormat.DEFAULT, DateFormat.DEFAULT, Locale.US);
-	private final DateFormat localFormat = DateFormat.getDateTimeInstance(
-			DateFormat.DEFAULT, DateFormat.DEFAULT);
+	private final DateFormat chinaFormat = DateFormat.getDateTimeInstance(
+			DateFormat.DEFAULT, DateFormat.DEFAULT, Locale.CHINA);
+	
 	private final DateFormat iso8601Format = buildIso8601Format();
 
 	private static DateFormat buildIso8601Format() {
@@ -24,21 +26,29 @@ public class DateFormatTest {
 		iso8601Format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return iso8601Format;
 	}
+	
+	@Test
+	public void localeImpact() {
+		Date now = new Date();
+		System.out.println("Chinese time: " + chinaFormat.format(now));
+		System.out.println("American time: " + usFormat.format(now));
+	}
 
 	@Test
 	public void testDateTypeAdaptor() throws Exception {
 		String json = "2018-02-14T12:49:46.000Z";
 
 		try {
-			System.out.println(localFormat.parse(json));
+			System.out.println("Locale:" + chinaFormat.parse(json));
+		} catch (ParseException ignored) {
+		}
+		
+		try {
+			System.out.println("US: " + usFormat.parse(json));
 		} catch (ParseException ignored) {
 		}
 		try {
-			System.out.println(enUsFormat.parse(json));
-		} catch (ParseException ignored) {
-		}
-		try {
-			System.out.println(iso8601Format.parse(json));
+			System.out.println("ISO: " + iso8601Format.parse(json));
 		} catch (ParseException e) {
 			throw new JsonSyntaxException(json, e);
 		}
