@@ -10,6 +10,8 @@ import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.junit.Assert;
+
 /**
  * All kinds of date operation.
  * 
@@ -341,18 +343,31 @@ public class DateUtil {
     	}
     }
     /**************************************************************************************************/
-	
-	/**
-	 * Date stored in database may be not system time, for example, it may be beijing time. If we compare it with system time directly, it's not correct.
-	 * We must convert it into system time first. 
-	 * @param date Date from database
-	 * @param zone Which time zone date does belong.
-	 * @return Local time
+    /**
+	 * 
+	 * @param date
+	 * @param fromZone, the original time zone of date
+	 * @param toZone the time zone will converted to.
+	 * @return new date in toZone.
 	 */
-	public static Date convertToSystemTime(Date date, TimeZone zone) {
-		long gap = zone.getRawOffset() - TimeZone.getDefault().getRawOffset();
+	public static Date convert(Date date, TimeZone fromZone, TimeZone toZone) {
+		Assert.assertNotNull(fromZone);
+		Assert.assertNotNull(toZone);
 		
-		return new Date(date.getTime() + gap);
+		if (fromZone.equals(toZone)) {
+			return date;
+		} else {
+			long gap = toZone.getRawOffset() - fromZone.getRawOffset();
+			if (fromZone.inDaylightTime(date)) {
+				gap -= fromZone.getDSTSavings();
+			}
+			
+			if (toZone.inDaylightTime(date)) {
+				gap += toZone.getDSTSavings();
+			}
+			
+			return new Date(date.getTime() + gap);
+		}
 	}
 
 	/**
