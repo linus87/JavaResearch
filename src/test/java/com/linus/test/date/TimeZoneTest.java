@@ -15,7 +15,8 @@ public class TimeZoneTest {
 		TimeZone defaultZone = TimeZone.getDefault();
 		
 		System.out.println("=======================Default Zone=====================");
-		System.out.println("PST raw offset: " + defaultZone.getRawOffset());
+		System.out.println("Current timezone: " + defaultZone.getDisplayName());
+		System.out.println("Current timezone raw offset: " + defaultZone.getRawOffset());
 		System.out.println("defaultZone DST: " + defaultZone.getDSTSavings());
 	}
 

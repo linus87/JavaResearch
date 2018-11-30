@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import com.linus.date.DateUtil;
 
-public class DateUtilTest {
+public class DateTimeZoneConversionTest {
 	DateFormat dateFormat = null;
 	TimeZone systemTimeZone = TimeZone.getTimeZone("America/Los_Angeles");
 	
@@ -89,6 +89,8 @@ public class DateUtilTest {
 	private void print(Date now, Date newDate) {
 		System.out.println("now:" + now);
 		System.out.println("new:" + newDate);
+		
+		System.out.println(dateFormat.format(newDate));
 	}
 	
 }

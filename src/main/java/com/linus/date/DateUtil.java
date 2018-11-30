@@ -343,14 +343,42 @@ public class DateUtil {
     	}
     }
     /**************************************************************************************************/
-    /**
+	/**
+	 * Date don't have time zone information. So, it's always a local time. If you want to convert date from one time zone to another,
+	 * you have to provide the source time zone and the destination time zone.
 	 * 
-	 * @param date
+	 * @param date Local time
 	 * @param fromZone, the original time zone of date
 	 * @param toZone the time zone will converted to.
 	 * @return new date in toZone.
 	 */
 	public static Date convert(Date date, TimeZone fromZone, TimeZone toZone) {
+		Assert.assertNotNull(fromZone);
+		Assert.assertNotNull(toZone);
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		// get the time representation of destination time zone from local time.
+		format.setTimeZone(toZone);
+		String newDate = format.format(date);
+		
+		// correct new date with source time zone 
+		format.setTimeZone(fromZone);
+		try {
+			return format.parse(newDate);
+		} catch (ParseException e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * This method works in most situations. But it may fail when it's less than an hour before the daylight saving time start day.
+	 * @param date Local time
+	 * @param fromZone, the original time zone of date
+	 * @param toZone the time zone will converted to.
+	 * @return new date in toZone.
+	 */
+	@Deprecated
+	public static Date convert2(Date date, TimeZone fromZone, TimeZone toZone) {
 		Assert.assertNotNull(fromZone);
 		Assert.assertNotNull(toZone);
 		
