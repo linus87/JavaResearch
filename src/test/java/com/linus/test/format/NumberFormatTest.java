@@ -1,6 +1,8 @@
 package com.linus.test.format;
 
+import java.math.RoundingMode;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -16,13 +18,20 @@ public class NumberFormatTest {
 	}
 	
 	@Test
-	public void percentageFormat() {
+	public void percentageFormat() throws ParseException {
 		NumberFormat chinaFormat = NumberFormat.getPercentInstance(Locale.CHINA);
 		NumberFormat usFormat = NumberFormat.getPercentInstance(Locale.US);
 		
 		System.out.println("***************Percentage format***************");
 		System.out.println("Chinese: " + chinaFormat.format(0.4556));
 		System.out.println("American: " + usFormat.format(0.4556));
+		
+		System.out.println("***************After use rounding mode***************");
+		usFormat.setRoundingMode(RoundingMode.FLOOR);
+		usFormat.setMaximumFractionDigits(0);
+		System.out.println("American: " + usFormat.format(0.4556D));
+		
+		System.out.println("American: " + usFormat.parse("45%"));
 	}
 	
 	@Test

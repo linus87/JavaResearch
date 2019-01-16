@@ -16,6 +16,9 @@ public class StringTest {
 		
 		char c = '3';
 		System.out.println(c);
+		
+		Double d = (Double) null;
+		System.out.println(d);
 	}
 	
 	@Test

@@ -12,8 +12,11 @@ public class IntegerMain {
 		
 		System.out.println("5/4 = " + ((double)5 / 4));
 		
-		Integer v = Integer.parseInt("3.58");
-		System.out.println(v);
+//		Integer v = Integer.parseInt("3.58");
+//		System.out.println(v);
+		
+		long value = 3L;
+		System.out.println((int)value);
 	}
 
 }
