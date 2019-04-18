@@ -1,5 +1,9 @@
 package com.linus.test.primitive;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
+import org.apache.commons.lang.StringEscapeUtils;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -55,4 +59,12 @@ public class StringTest {
 		
 		String a = null;
 	}
+	
+	@Test
+	public void URLEncoderTest() throws UnsupportedEncodingException {
+		String results = URLDecoder.decode("%2c  100% Xeon ", "UTF-8");
+		String str = "%2c";
+		System.out.println(results);
+	}
+	
 }
