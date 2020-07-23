@@ -47,6 +47,7 @@ public class DateFormatTest {
 			System.out.println("US: " + usFormat.parse(json));
 		} catch (ParseException ignored) {
 		}
+		
 		try {
 			System.out.println("ISO: " + iso8601Format.parse(json));
 		} catch (ParseException e) {
@@ -54,4 +55,14 @@ public class DateFormatTest {
 		}
 
 	}
+	
+	@Test
+	public void testForamt() throws Exception {
+		String json = "20180214";
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		formatter.setTimeZone(TimeZone.getTimeZone("PST"));
+		Date date = formatter.parse(json);
+		System.out.println(date);
+	}
+	
 }

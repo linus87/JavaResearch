@@ -18,24 +18,6 @@ public class DateTest {
 	 */
 	public static void main(String[] args) throws ParseException  {
 		// TODO Auto-generated method stub
-		Calendar d = Calendar.getInstance();
-		d.set(2015, 0, 3);
-		
-//		d.setTime(null);
-		
-		System.out.println(d.toString());
-		System.out.println("Month: " + d.get(Calendar.MONTH)); // 1- 31
-		System.out.println("Day of year: " + d.get(Calendar.DAY_OF_YEAR)); // 1- 31
-		System.out.println("Day of month: " + d.get(Calendar.DAY_OF_MONTH)); // 1- 31
-		System.out.println("Day of week: " + d.get(Calendar.DAY_OF_WEEK));  // 1 - 7
-		System.out.println("Day of week in month: " + d.get(Calendar.DAY_OF_WEEK_IN_MONTH)); // 0 -11
-		System.out.println("Day of year: " + d.get(Calendar.DAY_OF_YEAR)); // 0 -11
-		System.out.println("First day of week: " + d.getFirstDayOfWeek());
-		System.out.println("Minimal days in first week: " + d.getMinimalDaysInFirstWeek());  // how many days are needed to be the first week of this year.
-		System.out.println("Date Actual Maximum:" + d.getActualMaximum(Calendar.DATE));
-		System.out.println("Date actual minimum: " + d.getActualMinimum(Calendar.DATE));
-		System.out.println("Date greatest minimum: " + d.getGreatestMinimum(Calendar.DATE));
-		System.out.println("Day of week: " + d.getGreatestMinimum(Calendar.DAY_OF_WEEK));
 		
 		double result = 1;
 		System.out.println(result);

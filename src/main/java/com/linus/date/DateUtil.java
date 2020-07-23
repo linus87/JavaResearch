@@ -10,7 +10,6 @@ import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.junit.Assert;
 
 /**
  * All kinds of date operation.
@@ -353,8 +352,6 @@ public class DateUtil {
 	 * @return new date in toZone.
 	 */
 	public static Date convert(Date date, TimeZone fromZone, TimeZone toZone) {
-		Assert.assertNotNull(fromZone);
-		Assert.assertNotNull(toZone);
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		// get the time representation of destination time zone from local time.
@@ -379,8 +376,6 @@ public class DateUtil {
 	 */
 	@Deprecated
 	public static Date convert2(Date date, TimeZone fromZone, TimeZone toZone) {
-		Assert.assertNotNull(fromZone);
-		Assert.assertNotNull(toZone);
 		
 		if (fromZone.equals(toZone)) {
 			return date;
