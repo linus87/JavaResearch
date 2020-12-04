@@ -1,5 +1,6 @@
 package com.linus.test.date;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -19,6 +20,18 @@ public class CalendarTest {
 		d.set(2015, 0, 3, 0, 0,  0);
 		
 		System.out.println(d.getTime());
+	}
+	
+	/**
+	 * /* Date represents a specific instant in time UTC, but always shown as the local time zone time.
+	 */
+	@Test
+	public void calendarFormat() {
+		Calendar d = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+		
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		System.out.println(df.format(d.getTime()));
 	}
 	
 	/**

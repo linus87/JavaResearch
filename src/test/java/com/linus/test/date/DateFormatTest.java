@@ -23,7 +23,7 @@ public class DateFormatTest {
 	private static DateFormat buildIso8601Format() {
 		DateFormat iso8601Format = new SimpleDateFormat(
 				"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
-		iso8601Format.setTimeZone(TimeZone.getTimeZone("UTC"));
+		iso8601Format.setTimeZone(TimeZone.getTimeZone("GMT+2"));
 		return iso8601Format;
 	}
 	
